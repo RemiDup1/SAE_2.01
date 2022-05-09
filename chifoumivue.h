@@ -15,6 +15,15 @@ public:
     chifoumiVue(QWidget *parent = nullptr);
     ~chifoumiVue();
 
+private slots:
+    void demarerPartie();
+    void coupPierre();
+    void coupCiseau();
+    void coupPapier();
+    void coupMachine(int);
+    int randMinMax(int, int);
+    char determineGagnat(int,int);
+
 private:
     Ui::chifoumiVue *ui;
 };
