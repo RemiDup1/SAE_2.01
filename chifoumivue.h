@@ -16,15 +16,15 @@ public:
     ~chifoumiVue();
 
 private slots:
-    void demarerPartie();
-    void coupPierre();
-    void coupCiseau();
-    void coupPapier();
-    void coupMachine(int);
-    int randMinMax(int, int);
-    char determineGagnat(int,int);
+    void demarerPartie();           //Slot pour commencer la partie
+    void coupPierre();              //slot pour le coup Pierre
+    void coupCiseau();              //slot pour le coup ciseau
+    void coupPapier();              //slot pour le coup papier
+    void coupMachine(int);          //slot pour le coup effectuer par la machine
 
 private:
     Ui::chifoumiVue *ui;
+    int randMinMax(int, int);       //fonction qui génère un nombre aléatoire
+    char determineGagnat(int,int);  //Fonction qui determine le gagnant entre le joueur et la machine
 };
 #endif // CHIFOUMIVUE_H
