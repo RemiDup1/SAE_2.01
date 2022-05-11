@@ -10,10 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    chifoumivue.cpp
+    chifoumivue.cpp \
+    modele.cpp \
+    presentation.cpp
 
 HEADERS += \
-    chifoumivue.h
+    chifoumivue.h \
+    modele.h \
+    presentation.h
 
 FORMS += \
     chifoumivue.ui
