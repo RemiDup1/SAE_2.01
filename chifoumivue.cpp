@@ -31,11 +31,16 @@ chifoumiVue::~chifoumiVue()
 void chifoumiVue::demarerPartie()
 {
     //Demarage d'une nouvelle partie
-    _laPresentation->reinitialiserPartie();
+    int varChifoumiVue;
+    varChifoumiVue = _laPresentation->reinitialiserPartie();
 
-    ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
-    ui ->ImageChoixMachi->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
-    ui ->ChoixFigure->setEnabled(true);
+    ui -> ImageChoixUtili -> setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
+    ui -> ImageChoixMachi -> setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
+    ui -> ChoixFigure -> setEnabled(true);
+
+    QString var;
+    var = QString::number(varChifoumiVue);
+    ui -> ScoreVous -> setText(var);
 
 }
 

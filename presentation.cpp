@@ -6,12 +6,14 @@ presentation::presentation()
 
 }
 
-void presentation::reinitialiserPartie()
+int presentation::reinitialiserPartie()
 {
-    qDebug () << "init reinitialiser";
+    int scoreJoueur;
+    int scoreMachine;
 
 }
 
+void majInterface()
 
 /*void presentation::deroulementPartie()
 {

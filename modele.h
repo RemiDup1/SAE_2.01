@@ -31,8 +31,10 @@ private :
     /* retourne une valeur aléatoire = pierre, papier ou ciseau. Utilisée pour faire jouer la machine */
     // Setters
 public:
+    int test();
+    /* fonction de test des slots*/
     void setCoupJoueur(int);
-    /* initialise l'attribut coupJoueur avec la valeur du paramètre p_coup */
+    /*initialise l'attribut coupJoueur avec la valeur du paramètre p_coup */
     void setCoupMachine();
     /* initialise l'attribut coupmachine avec la valeur du paramètre p_coup */
     void setScoreJoueur(unsigned int p_score);

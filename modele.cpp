@@ -1,5 +1,5 @@
 #include "modele.h"
-#include "QtDebug"
+#include "QDebug"
 
 modele::modele()
 {
@@ -63,6 +63,7 @@ char modele::determinerGagnant()
     qDebug() << "Fin determiner gagnant " << Qt::endl;
     return gagnantARetourner;
 }
+
 
 //Fonction permettant de determiner le score de la machine aléatoirement
 int randMinMax(int min, int max)
@@ -147,3 +148,13 @@ void modele::initCoups()
     coupJoueur = rien;
     coupMachine = rien;
 }
+
+int modele::test()
+{
+    int var = 16 ;
+    qDebug () << "Modele.cpp, fonction test initialisé" << Qt::endl;
+    return var;
+    qDebug () << "Modele.cpp, fonction test fin de tache" << Qt::endl;
+
+}
+
