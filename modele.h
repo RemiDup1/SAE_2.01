@@ -2,10 +2,10 @@
 #define MODELE_H
 
 
-class modele
+class Modele
 {
 public:
-    modele();
+    Modele();
     ///* ---- PARTIE MODèLE ---------------------------
 
     ///* Une définition de type énuméré

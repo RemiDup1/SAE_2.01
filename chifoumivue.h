@@ -2,13 +2,15 @@
 #define CHIFOUMIVUE_H
 
 #include <QMainWindow>
+#include "modele.h"
+#include "Presentation.h"
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class chifoumiVue; }
 QT_END_NAMESPACE
 
-class presentation;
+class Presentation;
 class chifoumiVue : public QMainWindow
 {
     Q_OBJECT
@@ -16,16 +18,25 @@ class chifoumiVue : public QMainWindow
 public:
     chifoumiVue(QWidget *parent = nullptr);
     ~chifoumiVue();
+    void setPresentation(Presentation *p);
+    Presentation * getPresentation();
+    void afficherScoreJoueur(unsigned int scoreJ);
+    void afficherScoreMachine(unsigned int scoreM);
+    void afficherCoupJoueur(Modele::UnCoup coupJ);
+    void afficherCoupMachine(Modele::UnCoup coupM);
+    void majInterface(Presentation::UnEtatJeu e);
+    QString afficherNomCoup (Modele::UnCoup c);
+
 
 private slots:
-    void demarerPartie();
+    void demarrerPartie();
     void coupPierre();
     void coupCiseau();
     void coupPapier();
 
 ///* Attributs du Modèle
 private:
-    presentation *_laPresentation;
+    Presentation *laPresentation;
     Ui::chifoumiVue *ui;
 
 

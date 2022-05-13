@@ -1,31 +1,31 @@
 #include "modele.h"
 #include "QDebug"
 
-modele::modele()
+Modele::Modele()
 {
 
 }
-modele::UnCoup modele::getCoupJoueur()
+Modele::UnCoup Modele::getCoupJoueur()
 {
     return coupJoueur;
 }
 
-modele::UnCoup modele::getCoupMachine()
+Modele::UnCoup Modele::getCoupMachine()
 {
     return coupMachine;
 }
 
-unsigned int modele::getScoreJoueur()
+unsigned int Modele::getScoreJoueur()
 {
     return scoreJoueur;
 }
 
-unsigned int modele::getScoreMachine()
+unsigned int Modele::getScoreMachine()
 {
     return scoreMachine;
 }
 
-char modele::determinerGagnant()
+char Modele::determinerGagnant()
 {
     qDebug() << "Debut determiner gagnant " << Qt::endl;
     char gagnantARetourner;
@@ -73,7 +73,7 @@ int randMinMax(int min, int max)
 }
 
 
-void modele::setCoupJoueur(int num)
+void Modele::setCoupJoueur(int num)
 {
     qDebug () << num << Qt::endl;
     if (num == 1)
@@ -93,7 +93,7 @@ void modele::setCoupJoueur(int num)
 }
 
 //fonction permettant d'indiquer le coup de la machine et de determiner le gagnant
-void modele::setCoupMachine()
+void Modele::setCoupMachine()
 {
     int num;
     num = randMinMax(1,4);
@@ -112,17 +112,17 @@ void modele::setCoupMachine()
     }
 }
 
-void modele::setScoreJoueur(unsigned int p_score)
+void Modele::setScoreJoueur(unsigned int p_score)
 {
     scoreJoueur = scoreJoueur + p_score;
 }
 
-void modele::setScoreMachine(unsigned int p_score)
+void Modele::setScoreMachine(unsigned int p_score)
 {
     scoreMachine = scoreMachine + p_score;
 }
 
-void modele::majScores(char p_gagnant)
+void Modele::majScores(char p_gagnant)
 {
     if (p_gagnant == 'J')
     {
@@ -137,19 +137,19 @@ void modele::majScores(char p_gagnant)
     }
 }
 
-void modele::initScores()
+void Modele::initScores()
 {
     scoreJoueur = 0;
     scoreMachine = 0;
 }
 
-void modele::initCoups()
+void Modele::initCoups()
 {
     coupJoueur = rien;
     coupMachine = rien;
 }
 
-int modele::test()
+int Modele::test()
 {
     int var = 16 ;
     qDebug () << "Modele.cpp, fonction test initialisé" << Qt::endl;
