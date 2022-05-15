@@ -41,6 +41,7 @@ void Presentation::demarrerPartie()
     switch (etat)
     {
         case etatInitial:
+            qDebug() << "Presentation : Demarrer Partie -> cas <<etat initial>> activé" << Qt::endl;
             //maj de l'etat
             setEtat(partieEnCours);
         //activité 1
@@ -57,6 +58,7 @@ void Presentation::demarrerPartie()
 
             break;
         case partieEnCours:
+            qDebug() << "Presentation : Demarrer Partie -> cas <<partie en cours>> activé" << Qt::endl;
             break;
         default:
             break;
@@ -71,6 +73,8 @@ void Presentation::coupPierre()
         case etatInitial:
             break;
         case partieEnCours:
+            getModele()->setCoupJoueur(2);
+            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
             break;
         default:
             break;

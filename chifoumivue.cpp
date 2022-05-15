@@ -1,7 +1,7 @@
 /*
  * Programme du chifoumi
- * Version 1 du programme
- * Date dernier modification : 09/05/2022
+ * programmation de la V2
+ * Date dernier modification : 15/05/2022
  * auteur : Remi Dupin
  *
 */
@@ -21,8 +21,6 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(ui -> BoutPierre,SIGNAL(clicked()),this,SLOT(coupPierre()));                //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
     connect(ui->BoutCiseaux,SIGNAL(clicked()),this,SLOT(coupCiseau()));                 //Connexion du bouton ciseau avec le slot qui permet au joueur de jouer ciseau
     connect(ui->BoutPapier,SIGNAL(clicked()),this,SLOT(coupPapier()));                  //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
-
-
 }
 
 chifoumiVue::~chifoumiVue()
@@ -42,18 +40,32 @@ Presentation *chifoumiVue::getPresentation()
 
 void chifoumiVue::afficherScoreJoueur(unsigned int scoreJ)
 {
-    qDebug () << "chifoumiVue : J'affiche score joueur = " << scoreJ << Qt::endl;
+    QString valScoreJ;
+    valScoreJ = QString::number(scoreJ);
+    ui->ScoreVous->setText(valScoreJ);
 }
 
 void chifoumiVue::afficherScoreMachine(unsigned int scoreM)
 {
-    qDebug () << "chifoumiVue : J'affiche score machine = " << scoreM << Qt::endl;
+    QString valScoreM;
+    valScoreM = QString::number(scoreM);
+    ui->ScoreMachine->setText(valScoreM);
 }
 
 void chifoumiVue::afficherCoupJoueur(Modele::UnCoup coupJ)
 {
-    //QString
     qDebug () << "chifoumiVue : coup Joueur  = " << afficherNomCoup(coupJ) << Qt::endl;
+    switch (coupJ)
+    {
+        case Modele::pierre:
+            break;
+        case Modele::papier:
+            break;
+        case Modele::ciseau:
+            break;
+        default:
+            break;
+    }
 }
 
 void chifoumiVue::afficherCoupMachine(Modele::UnCoup coupM)
@@ -130,20 +142,18 @@ void chifoumiVue::demarrerPartie()
 void chifoumiVue::coupPierre()
 {
     getPresentation()->coupPierre();
-
-    //ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/pierre_115.png")));
 }
 
 void chifoumiVue::coupCiseau()
 {
     getPresentation()->coupCiseau();
-    //ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/ciseau_115.png")));
+    ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/ciseau_115.png")));
 }
 
 void chifoumiVue::coupPapier()
 {
     getPresentation()->coupPapier();
-    //ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/papier_115.png")));
+    ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/papier_115.png")));
 }
 
 
