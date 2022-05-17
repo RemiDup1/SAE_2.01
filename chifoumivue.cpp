@@ -1,7 +1,7 @@
 /*
  * Programme du chifoumi
  * programmation de la V2
- * Date dernier modification : 15/05/2022
+ * Date dernier modification : 17/05/2022
  * auteur : Remi Dupin
  *
 */
@@ -54,23 +54,44 @@ void chifoumiVue::afficherScoreMachine(unsigned int scoreM)
 
 void chifoumiVue::afficherCoupJoueur(Modele::UnCoup coupJ)
 {
-    qDebug () << "chifoumiVue : coup Joueur  = " << afficherNomCoup(coupJ) << Qt::endl;
-    switch (coupJ)
+    QString valCoupJ = afficherNomCoup(coupJ);
+    if (valCoupJ == "rien")
     {
-        case Modele::pierre:
-            break;
-        case Modele::papier:
-            break;
-        case Modele::ciseau:
-            break;
-        default:
-            break;
+        ui->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));
+    }
+    if (valCoupJ == "pierre")
+    {
+        ui->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/pierre_115.png")));
+    }
+    if (valCoupJ == "papier")
+    {
+        ui->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/papier_115.png")));
+    }
+    if (valCoupJ == "ciseau")
+    {
+        ui->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/ciseau_115.png")));
     }
 }
 
 void chifoumiVue::afficherCoupMachine(Modele::UnCoup coupM)
 {
-    qDebug () << "chifoumiVue : coup Machine  = " << afficherNomCoup(coupM) << Qt::endl;
+    QString valCoupM = afficherNomCoup(coupM);
+    if (valCoupM == "rien")
+    {
+        ui->ImageChoixMachi->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));
+    }
+    if (valCoupM == "pierre")
+    {
+        ui->ImageChoixMachi->setPixmap(QPixmap(QString::fromUtf8(":/images/images/pierre_115.png")));
+    }
+    if (valCoupM == "papier")
+    {
+        ui->ImageChoixMachi->setPixmap(QPixmap(QString::fromUtf8(":/images/images/papier_115.png")));
+    }
+    if (valCoupM == "ciseau")
+    {
+        ui->ImageChoixMachi->setPixmap(QPixmap(QString::fromUtf8(":/images/images/ciseau_115.png")));
+    }
 }
 
 void chifoumiVue::majInterface(Presentation::UnEtatJeu e)
@@ -119,24 +140,6 @@ QString chifoumiVue::afficherNomCoup(Modele::UnCoup c)
 void chifoumiVue::demarrerPartie()
 {
     getPresentation()->demarrerPartie();
-
-
-
-    /*
-    //Demarage d'une nouvelle partie
-    int varChifoumiVue;
-    varChifoumiVue = laPresentation->reinitialiserPartie();
-    //laPresentation->deroulementPartie();
-
-
-    ui -> ImageChoixUtili -> setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
-    ui -> ImageChoixMachi -> setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));    //Remise à rien de l'affichage pour le joueur
-    ui -> ChoixFigure -> setEnabled(true);
-
-    QString var;
-    var = QString::number(varChifoumiVue);
-    ui -> ScoreVous -> setText(var);
-    */
 }
 
 void chifoumiVue::coupPierre()
@@ -147,13 +150,11 @@ void chifoumiVue::coupPierre()
 void chifoumiVue::coupCiseau()
 {
     getPresentation()->coupCiseau();
-    ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/ciseau_115.png")));
 }
 
 void chifoumiVue::coupPapier()
 {
     getPresentation()->coupPapier();
-    ui ->ImageChoixUtili->setPixmap(QPixmap(QString::fromUtf8(":/images/images/papier_115.png")));
 }
 
 

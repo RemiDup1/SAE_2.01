@@ -8,9 +8,7 @@ class Presentation
 public:
     enum UnEtatJeu {etatInitial, partieEnCours};
     Presentation();
-    int reinitialiserPartie();
     void deroulementPartie();
-    void majInterface();
 
     void setModele(Modele * m);
     Modele * getModele();
@@ -22,6 +20,8 @@ public:
     void coupPierre();
     void coupCiseau();
     void coupPapier();
+    void coupMachine();
+    void majScore(char p_gagnant);
 
     void setEtat(UnEtatJeu e);
     UnEtatJeu getEtat();

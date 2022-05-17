@@ -27,7 +27,6 @@ unsigned int Modele::getScoreMachine()
 
 char Modele::determinerGagnant()
 {
-    qDebug() << "Debut determiner gagnant " << Qt::endl;
     char gagnantARetourner;
 
     // avant de commencer : match nul
@@ -35,61 +34,49 @@ char Modele::determinerGagnant()
     UnCoup joueur = getCoupJoueur();
     UnCoup machine = getCoupMachine();
 
-    qDebug () << machine << " " << joueur ;
     if (machine == UnCoup::papier && joueur == UnCoup::ciseau) {
         gagnantARetourner = 'J';
-        qDebug() << "Cas 1 " << Qt::endl;
     }
     if (machine == UnCoup::papier && joueur == UnCoup::pierre) {
         gagnantARetourner = 'M';
-        qDebug() << "Cas 2 " << Qt::endl;
     }
     if (machine == UnCoup::pierre && joueur == UnCoup::ciseau) {
         gagnantARetourner = 'M';
-        qDebug() << "Cas 3 " << Qt::endl;
     }
     if (machine == UnCoup::pierre && joueur == UnCoup::papier) {
         gagnantARetourner = 'J';
-        qDebug() << "Cas 4 " << Qt::endl;
     }
     if (machine == UnCoup::ciseau && joueur == UnCoup::pierre) {
         gagnantARetourner = 'J';
-        qDebug() << "Cas 5 " << Qt::endl;
     }
     if (machine == UnCoup::ciseau && joueur == UnCoup::papier) {
         gagnantARetourner = 'M';
-        qDebug() << "Cas 6 " << Qt::endl;
     }
-    qDebug() << "Fin determiner gagnant " << Qt::endl;
     return gagnantARetourner;
 }
 
+
+void Modele::setCoupJoueur(UnCoup coupJ)
+{
+    if (coupJ == UnCoup::papier)
+    {
+        coupJoueur = UnCoup::papier;
+    }
+    if (coupJ == UnCoup::pierre)
+    {
+        coupJoueur = UnCoup::pierre;
+    }
+    if (coupJ == UnCoup::ciseau)
+    {
+        coupJoueur = UnCoup::ciseau;
+    }
+}
 
 //Fonction permettant de determiner le score de la machine aléatoirement
 int randMinMax(int min, int max)
 {
      /*pré-condition : min<max, Le nbre aléatoire est compris entre [min, max[*/
     return rand()%(max-min) + min;
-}
-
-
-void Modele::setCoupJoueur(int num)
-{
-    qDebug () << num << Qt::endl;
-    if (num == 1)
-    {
-        qDebug () << "init papier";
-        coupJoueur = UnCoup::papier;
-    }
-    if (num == 2)
-    {
-        coupJoueur = UnCoup::pierre;
-    }
-    if (num == 3)
-    {
-        coupJoueur = UnCoup::ciseau;
-    }
-
 }
 
 //fonction permettant d'indiquer le coup de la machine et de determiner le gagnant
@@ -126,13 +113,10 @@ void Modele::majScores(char p_gagnant)
 {
     if (p_gagnant == 'J')
     {
-        qDebug() << "gagnant joueur " << Qt::endl;
         setScoreJoueur(1);
-
     }
     if (p_gagnant == 'M')
     {
-        qDebug() << "gagnant machine " << Qt::endl;
         setScoreMachine(1);
     }
 }
@@ -147,14 +131,5 @@ void Modele::initCoups()
 {
     coupJoueur = rien;
     coupMachine = rien;
-}
-
-int Modele::test()
-{
-    int var = 16 ;
-    qDebug () << "Modele.cpp, fonction test initialisé" << Qt::endl;
-    return var;
-    qDebug () << "Modele.cpp, fonction test fin de tache" << Qt::endl;
-
 }
 

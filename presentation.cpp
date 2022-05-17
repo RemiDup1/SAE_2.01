@@ -1,17 +1,11 @@
 #include "presentation.h"
 #include "QDebug"
 #include "chifoumivue.h"
+#include "modele.h"
 
 Presentation::Presentation()
 {
     setEtat(etatInitial);
-
-}
-
-
-int Presentation::reinitialiserPartie()
-{
-    return 0;
 
 }
 
@@ -37,11 +31,9 @@ chifoumiVue *Presentation::getVue()
 
 void Presentation::demarrerPartie()
 {
-    qDebug () << "presentation: nouvelle partie demandée " << Qt::endl;
     switch (etat)
     {
         case etatInitial:
-            qDebug() << "Presentation : Demarrer Partie -> cas <<etat initial>> activé" << Qt::endl;
             //maj de l'etat
             setEtat(partieEnCours);
         //activité 1
@@ -58,23 +50,38 @@ void Presentation::demarrerPartie()
 
             break;
         case partieEnCours:
-            qDebug() << "Presentation : Demarrer Partie -> cas <<partie en cours>> activé" << Qt::endl;
+            //maj du modele
+            getModele()->initScores();
+            getModele()->initCoups();
+            //Repercuter modele sur interface
+            getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
+            getVue()->afficherScoreMachine(getModele()->getScoreMachine());
+            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+            getVue()->afficherCoupMachine(getModele()->getCoupMachine());
             break;
         default:
             break;
     }
 }
 
+void Presentation::deroulementPartie()
+{
+    char p_gagnant;
+    coupMachine();
+    p_gagnant = getModele()->determinerGagnant();
+    majScore(p_gagnant);
+}
+
 void Presentation::coupPierre()
 {
-    qDebug () << "presentation: bouton Pierre cliqué " << Qt::endl;
     switch (etat)
     {
         case etatInitial:
             break;
         case partieEnCours:
-            getModele()->setCoupJoueur(2);
+            getModele()->setCoupJoueur(Modele::pierre);
             getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+            deroulementPartie();
             break;
         default:
             break;
@@ -83,12 +90,14 @@ void Presentation::coupPierre()
 
 void Presentation::coupCiseau()
 {
-    qDebug () << "presentation: bouton Ciseau cliqué " << Qt::endl;
     switch (etat)
     {
         case etatInitial:
             break;
         case partieEnCours:
+            getModele()->setCoupJoueur(Modele::ciseau);
+            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+            deroulementPartie();
             break;
         default:
             break;
@@ -97,16 +106,41 @@ void Presentation::coupCiseau()
 
 void Presentation::coupPapier()
 {
-    qDebug () << "presentation: bouton Papier cliqué " << Qt::endl;
     switch (etat)
     {
         case etatInitial:
             break;
         case partieEnCours:
+            getModele()->setCoupJoueur(Modele::papier);
+            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+            deroulementPartie();
             break;
         default:
             break;
     }
+}
+
+void Presentation::coupMachine()
+{
+    getModele()->setCoupMachine();
+    getVue()->afficherCoupMachine(getModele()->getCoupMachine());
+}
+
+void Presentation::majScore(char p_gagnant)
+{
+    getModele()->majScores(p_gagnant);
+    switch (p_gagnant)
+    {
+        case 'M':
+            getVue()->afficherScoreMachine(getModele()->getScoreMachine());
+            break;
+        case 'J':
+            getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
+            break;
+        default:
+            break;
+    }
+
 }
 
 void Presentation::setEtat(Presentation::UnEtatJeu e)
@@ -120,17 +154,5 @@ Presentation::UnEtatJeu Presentation::getEtat()
 }
 
 
-/*
 
-void Presentation::deroulementPartie()
-{
-    qDebug() << "debut deroulement " << Qt::endl;
-    char p_gagnant;
-    setCoupMachine();
-    p_gagnant = determinerGagnant();
 
-    majScores(p_gagnant);
-    qDebug() << "fin deroulement " << Qt::endl;
-}
-
-*/
