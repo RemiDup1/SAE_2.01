@@ -2,8 +2,11 @@
 #define CHIFOUMIVUE_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include "modele.h"
 #include "Presentation.h"
+#include <QDialog>
+#include <QMessageBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +36,7 @@ private slots:
     void coupPierre();
     void coupCiseau();
     void coupPapier();
+    void aProposDe();
 
 ///* Attributs du Modèle
 private:
