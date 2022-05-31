@@ -1,6 +1,7 @@
 #ifndef MODELE_H
 #define MODELE_H
 
+const unsigned int SCORE_LIMITE = 5;
 
 class Modele
 {
@@ -39,6 +40,8 @@ public:
     /* initialise l'attribut scoreJoueur avec la valeur du paramètre p_score */
     void setScoreMachine(unsigned int p_score);
     /* initialise l'attribut coupMachine avec la valeur du paramètre p_score */
+    void setLimiteScore();
+    //Met a jour le score max de victorie
 
 // Autres modificateurs
     void majScores(char p_gagnant);
@@ -51,11 +54,13 @@ public:
     void initCoups();
     /* initialise à rien les attributs coupJoueur et coupMachine NON indispensable */
     void deroulementPartie();
+
 private:
     unsigned int scoreJoueur=0;     // score actuel du joueur
     unsigned int scoreMachine=0;    // score actuel de la Machine
     UnCoup coupJoueur;              // dernier coup joué par le joueur
     UnCoup coupMachine;
+
 };
 
 #endif // MODELE_H

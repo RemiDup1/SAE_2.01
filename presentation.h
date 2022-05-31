@@ -17,6 +17,7 @@ public:
     chifoumiVue * getVue();
 
     void demarrerPartie();
+    void arreterPartie();
     void coupPierre();
     void coupCiseau();
     void coupPapier();

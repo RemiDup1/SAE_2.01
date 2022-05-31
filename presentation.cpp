@@ -31,36 +31,53 @@ chifoumiVue *Presentation::getVue()
 
 void Presentation::demarrerPartie()
 {
+    //maj du modele
+    getModele()->initScores();
+    getModele()->initCoups();
+    //Repercuter modele sur interface
+    getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
+    getVue()->afficherScoreMachine(getModele()->getScoreMachine());
+    getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+    getVue()->afficherCoupMachine(getModele()->getCoupMachine());
+
     switch (etat)
     {
-        case etatInitial:
-            //maj de l'etat
-            setEtat(partieEnCours);
-        //activité 1
-            //maj du modele
-            getModele()->initScores();
-            getModele()->initCoups();
-            //Repercuter modele sur interface
-            getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
-            getVue()->afficherScoreMachine(getModele()->getScoreMachine());
-            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
-            getVue()->afficherCoupMachine(getModele()->getCoupMachine());
-            //Maj de l'interactivité de l'interface
-            getVue()->majInterface(etat);
+    case etatInitial:
+        //maj de l'etat
+        setEtat(partieEnCours);
+        //Maj de l'interactivité de l'interface
+        getVue()->majInterface(etat);
+        break;
+    case partieEnCours:
+        break;
+    default:
+        break;
+    }
+}
 
-            break;
-        case partieEnCours:
-            //maj du modele
-            getModele()->initScores();
-            getModele()->initCoups();
-            //Repercuter modele sur interface
-            getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
-            getVue()->afficherScoreMachine(getModele()->getScoreMachine());
-            getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
-            getVue()->afficherCoupMachine(getModele()->getCoupMachine());
-            break;
-        default:
-            break;
+void Presentation::arreterPartie()
+{
+    //maj du modele
+    getModele()->initScores();
+    getModele()->initCoups();
+    //Repercuter modele sur interface
+    getVue()->afficherScoreJoueur(getModele()->getScoreJoueur());
+    getVue()->afficherScoreMachine(getModele()->getScoreMachine());
+    getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
+    getVue()->afficherCoupMachine(getModele()->getCoupMachine());
+
+    switch (etat)
+    {
+    case partieEnCours:
+        //maj de l'etat
+        setEtat(etatInitial);
+        //Maj de l'interactivité de l'interface
+        getVue()->majInterface(etat);
+        break;
+    case etatInitial:
+        break;
+    default:
+        break;
     }
 }
 
@@ -139,8 +156,25 @@ void Presentation::majScore(char p_gagnant)
             break;
         default:
             break;
+
     }
 
+    if (getModele()->getScoreMachine() >= SCORE_LIMITE)
+    {
+        arreterPartie();
+        QMessageBox *messageFin = new QMessageBox;
+        messageFin->setWindowTitle("Fin de la partie");
+        messageFin->setText("Perdu ! Vous avez perdu contre la machine !");
+        messageFin->show();
+    }
+    else if ( getModele()->getScoreJoueur() >= SCORE_LIMITE )
+    {
+        arreterPartie();
+        QMessageBox *messageFin = new QMessageBox;
+        messageFin->setWindowTitle("Fin de la partie");
+        messageFin->setText("Bravo, vous avez gagné contre la machine !");
+        messageFin->show();
+    }
 }
 
 void Presentation::setEtat(Presentation::UnEtatJeu e)
@@ -152,6 +186,8 @@ Presentation::UnEtatJeu Presentation::getEtat()
 {
     return etat;
 }
+
+
 
 
 

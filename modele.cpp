@@ -115,7 +115,7 @@ void Modele::majScores(char p_gagnant)
     {
         setScoreJoueur(1);
     }
-    if (p_gagnant == 'M')
+    else if (p_gagnant == 'M')
     {
         setScoreMachine(1);
     }
@@ -132,4 +132,10 @@ void Modele::initCoups()
     coupJoueur = rien;
     coupMachine = rien;
 }
+
+void Modele::setLimiteScore()
+{
+
+}
+
 
