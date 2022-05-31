@@ -105,16 +105,15 @@ void chifoumiVue::majInterface(Presentation::UnEtatJeu e)
     {
         case Presentation::etatInitial:
             ui -> ChoixFigure -> setEnabled(false);
-            ui ->BoutNouvellePartie -> setEnabled(true);
-            ui ->BoutNouvellePartie->setFocus();
             break;
         case Presentation::partieEnCours:
             ui -> ChoixFigure -> setEnabled(true);
-            ui ->BoutNouvellePartie -> setEnabled(true);
-            ui ->BoutNouvellePartie->setFocus();
             break;
         default:
             break;
+        ui ->BoutNouvellePartie -> setEnabled(true);
+        ui ->BoutNouvellePartie->setFocus();
+
     }
 }
 
@@ -180,6 +179,7 @@ void chifoumiVue::setLimiteScore(int scorePT)
     QString score = QString::number(scorePT);
     ui->labelLimiteScore->setText(score);
     ui->labelLimiteScore->show();
+    ui->labelScoreMax->show();
 }
 
 
