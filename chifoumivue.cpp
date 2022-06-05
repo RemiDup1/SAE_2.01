@@ -8,8 +8,9 @@
 */
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
-#include "presentation.h"
+#include "Presentation.h"
 #include "modele.h"
+#include <QDebug>
 
 
 
@@ -18,12 +19,15 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     , ui(new Ui::chifoumiVue)
 {
     ui->setupUi(this);
+    ui->labelTempsImparti->setText(QString::number(LIMITE_TEMPS));
     connect(ui ->action_Quitter, SIGNAL(triggered()), this, SLOT(close()));                 //Connexion avec l'option quitter dans l'onglet fichier
     connect(ui -> BoutNouvellePartie, SIGNAL(clicked()), this, SLOT(demarrerPartie()));     //Connexion du bouton nouvelle partie avec le slot qui demarre la partie
     connect(ui -> BoutPierre, SIGNAL(clicked()), this, SLOT(coupPierre()));                 //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
     connect(ui->BoutCiseaux, SIGNAL(clicked()), this, SLOT(coupCiseau()));                  //Connexion du bouton ciseau avec le slot qui permet au joueur de jouer ciseau
     connect(ui->BoutPapier, SIGNAL(clicked()), this, SLOT(coupPapier()));                   //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
-    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));           //Connexion avec l'option A Propos De dans l'onglet Aide
+    connect(ui->actionA_propos_de, SIGNAL(clicked()), this, SLOT(aProposDe()));             //Connexion avec l'option A Propos De dans l'onglet Aide
+    connect(compteARebours, SIGNAL(timeout()), this, SLOT(decompte()));                     // Connexion entre le compte à rebours et le slot permettant le décompte
+    connect(ui->BoutPause, SIGNAL(clicked()), this, SLOT(pause()));                         // Connexion entre le bouton de mise en pause de la partie et le slot permettant de le faire
 }
 
 
@@ -105,13 +109,21 @@ void chifoumiVue::majInterface(Presentation::UnEtatJeu e)
     {
         case Presentation::etatInitial:
             ui -> ChoixFigure -> setEnabled(false);
+            ui -> BoutPause -> setEnabled(false);
             break;
         case Presentation::partieEnCours:
+            compteARebours->start();
             ui -> ChoixFigure -> setEnabled(true);
+            ui -> BoutPause -> setEnabled(true);
+            ui -> BoutNouvellePartie -> setEnabled(true);
             break;
+        case Presentation::partieEnPause: // Si la partie est en pause :
+            compteARebours->stop();
+            ui -> BoutNouvellePartie -> setEnabled(false);
+            ui -> ChoixFigure -> setEnabled(false);
+            ui -> BoutPause -> setText("Reprendre");
         default:
             break;
-        ui ->BoutNouvellePartie -> setEnabled(true);
         ui ->BoutNouvellePartie->setFocus();
 
     }
@@ -143,7 +155,12 @@ QString chifoumiVue::afficherNomCoup(Modele::UnCoup c)
 
 void chifoumiVue::demarrerPartie()
 {
+    tempsRestant = LIMITE_TEMPS; // Initialisation du compte à rebours
     setLimiteScore(SCORE_LIMITE);
+    ui->labelTempsImparti->setText(QString::number(tempsRestant));
+    ui->labelTempsImparti->show();
+    compteARebours->start(1000);
+
     getPresentation()->demarrerPartie();
 }
 
@@ -174,6 +191,20 @@ void chifoumiVue::aProposDe()
     QMessageBox::information(this, auteurs, listeAuteurs);
 }
 
+void chifoumiVue::decompte()
+{
+    tempsRestant--;
+    QString tps = QString::number(tempsRestant);
+    ui->labelTempsImparti->setText(tps);
+    compteARebours->start(1000);
+    getPresentation()->tempsEcoule();
+}
+
+void chifoumiVue::pause()
+{
+    getPresentation()->pausePartie();
+}
+
 void chifoumiVue::setLimiteScore(int scorePT)
 {
     QString score = QString::number(scorePT);
@@ -181,7 +212,6 @@ void chifoumiVue::setLimiteScore(int scorePT)
     ui->labelLimiteScore->show();
     ui->labelScoreMax->show();
 }
-
 
 
 

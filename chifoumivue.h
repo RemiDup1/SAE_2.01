@@ -7,6 +7,7 @@
 #include "Presentation.h"
 #include <QDialog>
 #include <QMessageBox>
+#include <QTimer>
 
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +31,9 @@ public:
     void majInterface(Presentation::UnEtatJeu e);
     QString afficherNomCoup (Modele::UnCoup c);
     void setLimiteScore(int scorePT);
+    QTimer *compteARebours = new QTimer(this); // Objet de la classe QTimer pour faire le compte à rebours
+    int tempsRestant; // Initialisation d'un nombre entier représentant le temps restant
+
 
 
 private slots:
@@ -39,6 +43,8 @@ private slots:
     void coupCiseau();
     void coupPapier();
     void aProposDe();
+    void decompte(); // Slot pour le décompte du temps
+    void pause(); // Slot pour mettre le jeu en pause
 
 ///* Attributs du Modèle
 private:
