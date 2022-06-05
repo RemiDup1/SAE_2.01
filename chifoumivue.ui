@@ -514,6 +514,7 @@
      <string>&amp;Fichier</string>
     </property>
     <addaction name="action_Quitter"/>
+    <addaction name="actionParametrage"/>
    </widget>
    <widget class="QMenu" name="menu_Aide">
     <property name="title">
@@ -539,6 +540,11 @@
    </property>
    <property name="shortcut">
     <string>Alt+P</string>
+   </property>
+  </action>
+  <action name="actionParametrage">
+   <property name="text">
+    <string>&amp;Paramétrage</string>
    </property>
   </action>
  </widget>

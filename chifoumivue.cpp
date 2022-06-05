@@ -11,6 +11,7 @@
 #include "Presentation.h"
 #include "modele.h"
 #include <QDebug>
+#include <QDialog>
 
 
 
@@ -25,8 +26,9 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(ui -> BoutPierre, SIGNAL(clicked()), this, SLOT(coupPierre()));                 //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
     connect(ui->BoutCiseaux, SIGNAL(clicked()), this, SLOT(coupCiseau()));                  //Connexion du bouton ciseau avec le slot qui permet au joueur de jouer ciseau
     connect(ui->BoutPapier, SIGNAL(clicked()), this, SLOT(coupPapier()));                   //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
-    connect(ui->actionA_propos_de, SIGNAL(clicked()), this, SLOT(aProposDe()));             //Connexion avec l'option A Propos De dans l'onglet Aide
+    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));           //Connexion avec l'option A Propos De dans l'onglet Aide
     connect(compteARebours, SIGNAL(timeout()), this, SLOT(decompte()));                     // Connexion entre le compte à rebours et le slot permettant le décompte
+    connect(ui->actionParametrage, SIGNAL(triggered()), this, SLOT(parametrage()));          // Connexion entre l'action de paramétrage de la partie et le slot paramétrer
     connect(ui->BoutPause, SIGNAL(clicked()), this, SLOT(pause()));                         // Connexion entre le bouton de mise en pause de la partie et le slot permettant de le faire
 }
 
@@ -155,8 +157,8 @@ QString chifoumiVue::afficherNomCoup(Modele::UnCoup c)
 
 void chifoumiVue::demarrerPartie()
 {
-    tempsRestant = LIMITE_TEMPS; // Initialisation du compte à rebours
-    setLimiteScore(SCORE_LIMITE);
+    tempsRestant = getPresentation()->paramTemps; // Initialisation du compte à rebours
+    setLimiteScore(getPresentation()->paramScore);
     ui->labelTempsImparti->setText(QString::number(tempsRestant));
     ui->labelTempsImparti->show();
     compteARebours->start(1000);
@@ -203,6 +205,14 @@ void chifoumiVue::decompte()
 void chifoumiVue::pause()
 {
     getPresentation()->pausePartie();
+}
+
+void chifoumiVue::parametrage()
+{
+    param = new Parametres();
+    param->exec();
+    getPresentation()->paramScore = *param->scoremax;
+    getPresentation()->paramTemps = *param->tempsmax;
 }
 
 void chifoumiVue::setLimiteScore(int scorePT)

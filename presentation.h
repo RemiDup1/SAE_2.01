@@ -26,6 +26,9 @@ public:
     void coupMachine();
     void majScore(char p_gagnant);
 
+    unsigned int paramTemps = LIMITE_TEMPS;
+    unsigned int paramScore = SCORE_LIMITE;
+
     void setEtat(UnEtatJeu e);
     UnEtatJeu getEtat();
 

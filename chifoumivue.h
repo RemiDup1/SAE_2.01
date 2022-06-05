@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "modele.h"
 #include "Presentation.h"
+#include "parametres.h"
 #include <QDialog>
 #include <QMessageBox>
 #include <QTimer>
@@ -45,12 +46,13 @@ private slots:
     void aProposDe();
     void decompte(); // Slot pour le décompte du temps
     void pause(); // Slot pour mettre le jeu en pause
+    void parametrage();
 
 ///* Attributs du Modèle
 private:
     Presentation *laPresentation;
     Ui::chifoumiVue *ui;
-
+    Parametres *param;
 
 
 };
