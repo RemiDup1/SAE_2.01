@@ -61,7 +61,6 @@ private:
     unsigned int scoreMachine=0;    // score actuel de la Machine
     UnCoup coupJoueur;              // dernier coup joué par le joueur
     UnCoup coupMachine;
-
 };
 
 #endif // MODELE_H

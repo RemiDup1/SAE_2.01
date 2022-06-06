@@ -8,7 +8,7 @@
 */
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
-#include "Presentation.h"
+#include "presentation.h"
 #include "modele.h"
 #include <QDebug>
 #include <QDialog>
@@ -20,8 +20,18 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     , ui(new Ui::chifoumiVue)
 {
     ui->setupUi(this);
+
+    db = new Database(); // Lancement de la base de données
+    db->openDataBase();
+    db->restoreDataBase();
+
+    connexion = new Seconnecter(); // Aller vers la page de connexion
+    connexion->exec();
+    db->closeDataBase(); // Ferme la base de données une fois la connexion effectuée
+
     ui->labelTempsImparti->setText(QString::number(LIMITE_TEMPS));
     ui->LabelNom->setText(nomJoueur);
+
     connect(ui ->action_Quitter, SIGNAL(triggered()), this, SLOT(close()));                 //Connexion avec l'option quitter dans l'onglet fichier
     connect(ui -> BoutNouvellePartie, SIGNAL(clicked()), this, SLOT(demarrerPartie()));     //Connexion du bouton nouvelle partie avec le slot qui demarre la partie
     connect(ui -> BoutPierre, SIGNAL(clicked()), this, SLOT(coupPierre()));                 //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
@@ -31,6 +41,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(compteARebours, SIGNAL(timeout()), this, SLOT(decompte()));                     // Connexion entre le compte à rebours et le slot permettant le décompte
     connect(ui->actionParametrage, SIGNAL(triggered()), this, SLOT(parametrage()));          // Connexion entre l'action de paramétrage de la partie et le slot paramétrer
     connect(ui->BoutPause, SIGNAL(clicked()), this, SLOT(pause()));                         // Connexion entre le bouton de mise en pause de la partie et le slot permettant de le faire
+
 }
 
 
@@ -214,6 +225,7 @@ void chifoumiVue::parametrage()
 {
     param = new Parametres();
     param->exec();
+
     getPresentation()->parametrer();
     QString tps = QString::number(tempsRestant);
     ui->labelTempsImparti->setText(QString::number(getPresentation()->paramTemps));

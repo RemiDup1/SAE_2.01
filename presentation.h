@@ -1,6 +1,7 @@
 #ifndef PRESENTATION_H
 #define PRESENTATION_H
 #include "modele.h"
+#include "database.h"
 
 class chifoumiVue;
 class Presentation
@@ -32,6 +33,7 @@ public:
 
     void setEtat(UnEtatJeu e);
     UnEtatJeu getEtat();
+
 
 private:
     UnEtatJeu etat; //état du jeu par rapport au diagramme E.T

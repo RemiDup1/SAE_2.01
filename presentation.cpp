@@ -1,7 +1,7 @@
 #include "presentation.h"
-#include "QDebug"
 #include "chifoumivue.h"
 #include "modele.h"
+#include "database.h"
 
 Presentation::Presentation()
 {

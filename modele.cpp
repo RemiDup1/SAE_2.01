@@ -5,6 +5,7 @@ Modele::Modele()
 {
 
 }
+
 Modele::UnCoup Modele::getCoupJoueur()
 {
     return coupJoueur;

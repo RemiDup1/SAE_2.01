@@ -1,4 +1,5 @@
-QT       += core gui
+QT += core gui sql
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,21 +10,26 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    database.cpp \
     main.cpp \
     chifoumivue.cpp \
     modele.cpp \
     parametres.cpp \
-    presentation.cpp
+    presentation.cpp \
+    seconnecter.cpp
 
 HEADERS += \
     chifoumivue.h \
+    database.h \
     modele.h \
     parametres.h \
-    presentation.h
+    presentation.h \
+    seconnecter.h
 
 FORMS += \
     chifoumivue.ui \
-    parametres.ui
+    parametres.ui \
+    seconnecter.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
