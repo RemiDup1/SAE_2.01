@@ -6,7 +6,6 @@
 Presentation::Presentation()
 {
     setEtat(etatInitial);
-
 }
 
 void Presentation::setModele(Modele *m)
@@ -67,6 +66,15 @@ void Presentation::arreterPartie()
     getVue()->afficherCoupMachine(getModele()->getCoupMachine());
     getVue()->tempsRestant = paramTemps; // Arrêt du compte à rebours et réinitialisation de ce dernier
     getVue()->compteARebours->stop();
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO ScoresChifoumi (DateHeure, NomJoueur, ScoreJ, ScoreM) VALUES (?, ?, ?, ?)");
+    query.addBindValue("SYSDATE");
+    query.addBindValue(getVue()->nomJoueur);
+    query.addBindValue(getModele()->getScoreJoueur());
+    query.addBindValue(getModele()->getScoreMachine());
+    qDebug() << query.exec();
+
 
     switch (etat)
     {
@@ -232,6 +240,10 @@ void Presentation::setEtat(Presentation::UnEtatJeu e)
 Presentation::UnEtatJeu Presentation::getEtat()
 {
     return etat;
+}
+
+void Presentation::majScoresBDD()
+{
 }
 
 

@@ -27,7 +27,6 @@ chifoumiVue::chifoumiVue(QWidget *parent)
 
     connexion = new Seconnecter(); // Aller vers la page de connexion
     connexion->exec();
-    db->closeDataBase(); // Ferme la base de données une fois la connexion effectuée
 
     ui->labelTempsImparti->setText(QString::number(LIMITE_TEMPS));
     ui->LabelNom->setText(nomJoueur);
@@ -183,6 +182,7 @@ void chifoumiVue::demarrerPartie()
 void chifoumiVue::arreterPartie()
 {
     getPresentation()->arreterPartie();
+
 }
 
 void chifoumiVue::coupPierre()
@@ -240,6 +240,7 @@ void chifoumiVue::setLimiteScore(int scorePT)
     ui->labelLimiteScore->show();
     ui->labelScoreMax->show();
 }
+
 
 
 

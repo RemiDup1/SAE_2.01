@@ -34,6 +34,9 @@ public:
     void setEtat(UnEtatJeu e);
     UnEtatJeu getEtat();
 
+    Database *db = new Database();
+    void majScoresBDD();
+
 
 private:
     UnEtatJeu etat; //état du jeu par rapport au diagramme E.T

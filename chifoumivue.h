@@ -47,8 +47,6 @@ public:
     QString nomJoueur = "Vous";
 
     Seconnecter *connexion;
-    Database *db;
-
 
 
 private slots:
@@ -66,7 +64,7 @@ private slots:
 private:
     Presentation *laPresentation;
     Ui::chifoumiVue *ui;
-
+    Database *db;
 
 
 };
