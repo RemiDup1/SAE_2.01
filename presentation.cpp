@@ -68,8 +68,7 @@ void Presentation::arreterPartie()
     getVue()->compteARebours->stop();
 
     QSqlQuery query;
-    query.prepare("INSERT INTO ScoresChifoumi (DateHeure, NomJoueur, ScoreJ, ScoreM) VALUES (?, ?, ?, ?)");
-    query.addBindValue("SYSDATE");
+    query.prepare("INSERT INTO ScoresChifoumi (DateHeure, NomJoueur, ScoreJ, ScoreM) VALUES (CURRENT_TIMESTAMP(), ?, ?, ?)");
     query.addBindValue(getVue()->nomJoueur);
     query.addBindValue(getModele()->getScoreJoueur());
     query.addBindValue(getModele()->getScoreMachine());
