@@ -21,6 +21,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
 {
     ui->setupUi(this);
     ui->labelTempsImparti->setText(QString::number(LIMITE_TEMPS));
+    ui->LabelNom->setText(nomJoueur);
     connect(ui ->action_Quitter, SIGNAL(triggered()), this, SLOT(close()));                 //Connexion avec l'option quitter dans l'onglet fichier
     connect(ui -> BoutNouvellePartie, SIGNAL(clicked()), this, SLOT(demarrerPartie()));     //Connexion du bouton nouvelle partie avec le slot qui demarre la partie
     connect(ui -> BoutPierre, SIGNAL(clicked()), this, SLOT(coupPierre()));                 //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
@@ -110,11 +111,13 @@ void chifoumiVue::majInterface(Presentation::UnEtatJeu e)
     switch (e)
     {
         case Presentation::etatInitial:
+            ui -> actionParametrage ->setEnabled(true);
             ui -> ChoixFigure -> setEnabled(false);
             ui -> BoutPause -> setEnabled(false);
             break;
         case Presentation::partieEnCours:
             compteARebours->start();
+            ui -> actionParametrage ->setEnabled(false);
             ui -> ChoixFigure -> setEnabled(true);
             ui -> BoutPause -> setEnabled(true);
             ui -> BoutNouvellePartie -> setEnabled(true);
@@ -211,8 +214,11 @@ void chifoumiVue::parametrage()
 {
     param = new Parametres();
     param->exec();
-    getPresentation()->paramScore = *param->scoremax;
-    getPresentation()->paramTemps = *param->tempsmax;
+    getPresentation()->parametrer();
+    QString tps = QString::number(tempsRestant);
+    ui->labelTempsImparti->setText(QString::number(getPresentation()->paramTemps));
+    ui->LabelNom->setText(nomJoueur);
+    setLimiteScore(getPresentation()->paramScore);
 }
 
 void chifoumiVue::setLimiteScore(int scorePT)

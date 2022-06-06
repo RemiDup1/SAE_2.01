@@ -34,6 +34,8 @@ public:
     void setLimiteScore(int scorePT);
     QTimer *compteARebours = new QTimer(this); // Objet de la classe QTimer pour faire le compte à rebours
     int tempsRestant; // Initialisation d'un nombre entier représentant le temps restant
+    Parametres *param;
+    QString nomJoueur = "Vous";
 
 
 
@@ -52,7 +54,7 @@ private slots:
 private:
     Presentation *laPresentation;
     Ui::chifoumiVue *ui;
-    Parametres *param;
+
 
 
 };

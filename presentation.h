@@ -25,6 +25,7 @@ public:
     void coupPapier();
     void coupMachine();
     void majScore(char p_gagnant);
+    void parametrer();
 
     unsigned int paramTemps = LIMITE_TEMPS;
     unsigned int paramScore = SCORE_LIMITE;

@@ -16,7 +16,7 @@ Parametres::~Parametres()
 
 void Parametres::ok()
 {
-    *nom = ui->champNom->text();
-    *scoremax = ui->champScore->value();
-    *tempsmax = ui->champTemps->value();
+    nom = ui->champNom->text();
+    scoremax = ui->champScore->value();
+    tempsmax = ui->champTemps->value();
 }

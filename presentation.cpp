@@ -217,6 +217,13 @@ void Presentation::majScore(char p_gagnant) // Mise à jour des scores et affich
     }
 }
 
+void Presentation::parametrer()
+{
+    paramScore = getVue()->param->scoremax;
+    paramTemps = getVue()->param->tempsmax;
+    getVue()->nomJoueur = getVue()->param->nom;
+}
+
 void Presentation::setEtat(Presentation::UnEtatJeu e)
 {
     etat = e;

@@ -15,9 +15,9 @@ public:
     explicit Parametres(QWidget *parent = nullptr);
     ~Parametres();
 
-    QString *nom;
-    int *scoremax;
-    int *tempsmax;
+    QString nom;
+    int scoremax;
+    int tempsmax;
 
 private:
     Ui::Parametres *ui;
