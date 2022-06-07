@@ -1,6 +1,9 @@
 #ifndef TOPSCORES_H
 #define TOPSCORES_H
-
+/*
+Header du fichier concernant l'affichage des meilleurs scores (V9)
+Dernière modification : 07/06/2022
+*/
 #include <QDialog>
 
 namespace Ui {

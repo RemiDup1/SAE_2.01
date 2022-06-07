@@ -1,3 +1,8 @@
+/*
+Corps du modèle de l'application (V2)
+Dernière modification : 07/06/2022
+*/
+
 #include "modele.h"
 #include "QDebug"
 

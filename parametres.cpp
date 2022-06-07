@@ -1,3 +1,8 @@
+/*
+Corps du fichier gérant les paramètres de l'application (V6)
+Dernière modification : 07/06/2022
+*/
+
 #include "parametres.h"
 #include "ui_parametres.h"
 

@@ -1,3 +1,9 @@
+/*
+Corps du fichier gérant la connexion à l'application (V7)
+Dernière modification : 07/06/2022
+*/
+
+
 #include "seconnecter.h"
 #include "ui_seconnecter.h"
 #include "chifoumivue.h"

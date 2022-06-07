@@ -1,3 +1,8 @@
+/*
+Corps du main de l'application
+Dernière modification : 07/06/2022
+*/
+
 #include "chifoumivue.h"
 #include "presentation.h"
 #include "modele.h"

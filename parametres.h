@@ -1,5 +1,9 @@
 #ifndef PARAMETRES_H
 #define PARAMETRES_H
+/*
+Header du fichier concernant les paramètres de l'application (V6)
+Dernière modification : 07/06/2022
+*/
 
 #include <QDialog>
 

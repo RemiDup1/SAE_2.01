@@ -1,3 +1,8 @@
+/*
+Corps du fichier gérant les paramètres des meilleurs scores (V9)
+Dernière modification : 07/06/2022
+*/
+
 #include "topscores.h"
 #include "ui_topscores.h"
 #include <QtSql>

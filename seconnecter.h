@@ -1,6 +1,9 @@
 #ifndef SECONNECTER_H
 #define SECONNECTER_H
-
+/*
+Header du fichier concernant la connexion à l'application (V7)
+Dernière modification : 07/06/2022
+*/
 #include <QDialog>
 
 

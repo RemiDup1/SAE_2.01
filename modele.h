@@ -1,5 +1,9 @@
 #ifndef MODELE_H
 #define MODELE_H
+/*
+Header du fichier concernant le modèle de l'application (V2)
+Dernière modification : 07/06/2022
+*/
 
 const unsigned int SCORE_LIMITE = 5;
 const unsigned int LIMITE_TEMPS = 30;
