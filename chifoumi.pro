@@ -16,7 +16,8 @@ SOURCES += \
     modele.cpp \
     parametres.cpp \
     presentation.cpp \
-    seconnecter.cpp
+    seconnecter.cpp \
+    topscores.cpp
 
 HEADERS += \
     chifoumivue.h \
@@ -24,12 +25,14 @@ HEADERS += \
     modele.h \
     parametres.h \
     presentation.h \
-    seconnecter.h
+    seconnecter.h \
+    topscores.h
 
 FORMS += \
     chifoumivue.ui \
     parametres.ui \
-    seconnecter.ui
+    seconnecter.ui \
+    topscores.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

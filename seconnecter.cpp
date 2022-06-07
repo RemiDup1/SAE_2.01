@@ -1,7 +1,7 @@
 #include "seconnecter.h"
 #include "ui_seconnecter.h"
-#include "database.h"
 #include "chifoumivue.h"
+#include "presentation.h"
 #include <QDebug>
 
 Seconnecter::Seconnecter(QWidget *parent) :

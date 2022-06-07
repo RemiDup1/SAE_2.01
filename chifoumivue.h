@@ -7,10 +7,12 @@
 #include <QMessageBox>
 #include <QTimer>
 
+#include "topscores.h"
 #include "modele.h"
 #include "presentation.h"
 #include "parametres.h"
 #include "seconnecter.h"
+#include "database.h"
 
 
 
@@ -48,6 +50,7 @@ public:
 
     Seconnecter *connexion;
 
+    TopScores *scores;
 
 private slots:
     void demarrerPartie();
@@ -59,6 +62,7 @@ private slots:
     void decompte(); // Slot pour le décompte du temps
     void pause(); // Slot pour mettre le jeu en pause
     void parametrage();
+    void topScores();
 
 ///* Attributs du Modèle
 private:

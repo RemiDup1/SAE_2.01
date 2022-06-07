@@ -56,6 +56,8 @@ void Presentation::demarrerPartie()
 
 void Presentation::arreterPartie()
 {
+    int scoreFinalJoueur = getModele()->getScoreJoueur();
+    int scoreFinalMachine = getModele()->getScoreMachine();
     //maj du modele
     getModele()->initScores();
     getModele()->initCoups();
@@ -70,8 +72,8 @@ void Presentation::arreterPartie()
     QSqlQuery query;
     query.prepare("INSERT INTO ScoresChifoumi (DateHeure, NomJoueur, ScoreJ, ScoreM) VALUES (CURRENT_TIMESTAMP(), ?, ?, ?)");
     query.addBindValue(getVue()->nomJoueur);
-    query.addBindValue(getModele()->getScoreJoueur());
-    query.addBindValue(getModele()->getScoreMachine());
+    query.addBindValue(scoreFinalJoueur);
+    query.addBindValue(scoreFinalMachine);
     qDebug() << query.exec();
 
 
@@ -241,9 +243,6 @@ Presentation::UnEtatJeu Presentation::getEtat()
     return etat;
 }
 
-void Presentation::majScoresBDD()
-{
-}
 
 
 

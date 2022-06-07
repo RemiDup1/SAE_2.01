@@ -8,8 +8,7 @@
 */
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
-#include "presentation.h"
-#include "modele.h"
+
 #include <QDebug>
 #include <QDialog>
 
@@ -21,7 +20,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
 {
     ui->setupUi(this);
 
-    db = new Database(); // Lancement de la base de données
+    db = new Database();
     db->openDataBase();
     db->restoreDataBase();
 
@@ -40,6 +39,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(compteARebours, SIGNAL(timeout()), this, SLOT(decompte()));                     // Connexion entre le compte à rebours et le slot permettant le décompte
     connect(ui->actionParametrage, SIGNAL(triggered()), this, SLOT(parametrage()));          // Connexion entre l'action de paramétrage de la partie et le slot paramétrer
     connect(ui->BoutPause, SIGNAL(clicked()), this, SLOT(pause()));                         // Connexion entre le bouton de mise en pause de la partie et le slot permettant de le faire
+    connect(ui->actionMeilleurs_Scores, SIGNAL(triggered()), this, SLOT(topScores()));
 
 }
 
@@ -231,6 +231,14 @@ void chifoumiVue::parametrage()
     ui->labelTempsImparti->setText(QString::number(getPresentation()->paramTemps));
     ui->LabelNom->setText(nomJoueur);
     setLimiteScore(getPresentation()->paramScore);
+}
+
+void chifoumiVue::topScores()
+{
+    scores = new TopScores();
+    scores->hide();
+    scores->requeteBDD();
+    scores->show();
 }
 
 void chifoumiVue::setLimiteScore(int scorePT)
