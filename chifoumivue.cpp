@@ -1,14 +1,14 @@
 /*
  * Programme du chifoumi
- * programmation de la V2
- * Date dernier modification : 17/05/2022
- * auteur : Remi Dupin
+ * programmation de la V3/V4
+ * Statut : V3 Terminée, V4 en cours
+ * Date dernier modification : 24/05/2022
+ * auteur(s) : Dupin Remi / Cattarossi Dartiguelongue Thomas / Errezarret Leho
  *
 */
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
 #include "presentation.h"
-#include "qdebug.h"
 #include "modele.h"
 
 chifoumiVue::chifoumiVue(QWidget *parent)
@@ -16,11 +16,12 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     , ui(new Ui::chifoumiVue)
 {
     ui->setupUi(this);
-    connect(ui ->action_Quitter, SIGNAL(triggered()),this, SLOT(close()));              //Connexion avec l'option quitter dans l'onglet fichier
-    connect(ui -> BoutNouvellePartie, SIGNAL(clicked()),this,SLOT(demarrerPartie()));    //Connexion du bouton nouvelle partie avec le slot qui demarre la partie
-    connect(ui -> BoutPierre,SIGNAL(clicked()),this,SLOT(coupPierre()));                //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
-    connect(ui->BoutCiseaux,SIGNAL(clicked()),this,SLOT(coupCiseau()));                 //Connexion du bouton ciseau avec le slot qui permet au joueur de jouer ciseau
-    connect(ui->BoutPapier,SIGNAL(clicked()),this,SLOT(coupPapier()));                  //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
+    connect(ui ->action_Quitter, SIGNAL(triggered()), this, SLOT(close()));                 //Connexion avec l'option quitter dans l'onglet fichier
+    connect(ui -> BoutNouvellePartie, SIGNAL(clicked()), this, SLOT(demarrerPartie()));     //Connexion du bouton nouvelle partie avec le slot qui demarre la partie
+    connect(ui -> BoutPierre, SIGNAL(clicked()), this, SLOT(coupPierre()));                 //Connexion du bouton pierre avec le slot qui permet au joueur de jouer pierre
+    connect(ui->BoutCiseaux, SIGNAL(clicked()), this, SLOT(coupCiseau()));                  //Connexion du bouton ciseau avec le slot qui permet au joueur de jouer ciseau
+    connect(ui->BoutPapier, SIGNAL(clicked()), this, SLOT(coupPapier()));                   //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
+    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));           //Connexion avec l'option A Propos De dans l'onglet Aide
 }
 
 chifoumiVue::~chifoumiVue()
@@ -157,7 +158,12 @@ void chifoumiVue::coupPapier()
     getPresentation()->coupPapier();
 }
 
-
+void chifoumiVue::aProposDe()
+{
+    QString auteurs = "Auteurs :";
+    QString listeAuteurs = "DUPIN Rémi \nERREZARRET Leho \nCATTAROSSI DARTIGUELONGUE Thomas";
+    QMessageBox::information(this, auteurs, listeAuteurs);
+}
 
 
 
