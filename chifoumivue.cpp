@@ -11,6 +11,8 @@
 #include "presentation.h"
 #include "modele.h"
 
+
+
 chifoumiVue::chifoumiVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::chifoumiVue)
@@ -23,6 +25,8 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(ui->BoutPapier, SIGNAL(clicked()), this, SLOT(coupPapier()));                   //Connexion du bouton papier avec le slot qui permet au joueur de jouer papier
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(aProposDe()));           //Connexion avec l'option A Propos De dans l'onglet Aide
 }
+
+
 
 chifoumiVue::~chifoumiVue()
 {
@@ -101,16 +105,15 @@ void chifoumiVue::majInterface(Presentation::UnEtatJeu e)
     {
         case Presentation::etatInitial:
             ui -> ChoixFigure -> setEnabled(false);
-            ui ->BoutNouvellePartie -> setEnabled(true);
-            ui ->BoutNouvellePartie->setFocus();
             break;
         case Presentation::partieEnCours:
             ui -> ChoixFigure -> setEnabled(true);
-            ui ->BoutNouvellePartie -> setEnabled(true);
-            ui ->BoutNouvellePartie->setFocus();
             break;
         default:
             break;
+        ui ->BoutNouvellePartie -> setEnabled(true);
+        ui ->BoutNouvellePartie->setFocus();
+
     }
 }
 
@@ -140,7 +143,13 @@ QString chifoumiVue::afficherNomCoup(Modele::UnCoup c)
 
 void chifoumiVue::demarrerPartie()
 {
+    setLimiteScore(SCORE_LIMITE);
     getPresentation()->demarrerPartie();
+}
+
+void chifoumiVue::arreterPartie()
+{
+    getPresentation()->arreterPartie();
 }
 
 void chifoumiVue::coupPierre()
@@ -163,6 +172,14 @@ void chifoumiVue::aProposDe()
     QString auteurs = "Auteurs :";
     QString listeAuteurs = "DUPIN Rémi \nERREZARRET Leho \nCATTAROSSI DARTIGUELONGUE Thomas";
     QMessageBox::information(this, auteurs, listeAuteurs);
+}
+
+void chifoumiVue::setLimiteScore(int scorePT)
+{
+    QString score = QString::number(scorePT);
+    ui->labelLimiteScore->setText(score);
+    ui->labelLimiteScore->show();
+    ui->labelScoreMax->show();
 }
 
 

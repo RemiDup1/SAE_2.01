@@ -29,10 +29,12 @@ public:
     void afficherCoupMachine(Modele::UnCoup coupM);
     void majInterface(Presentation::UnEtatJeu e);
     QString afficherNomCoup (Modele::UnCoup c);
+    void setLimiteScore(int scorePT);
 
 
 private slots:
     void demarrerPartie();
+    void arreterPartie();
     void coupPierre();
     void coupCiseau();
     void coupPapier();
