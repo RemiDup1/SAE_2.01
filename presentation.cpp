@@ -65,6 +65,8 @@ void Presentation::arreterPartie()
     getVue()->afficherScoreMachine(getModele()->getScoreMachine());
     getVue()->afficherCoupJoueur(getModele()->getCoupJoueur());
     getVue()->afficherCoupMachine(getModele()->getCoupMachine());
+    getVue()->tempsRestant = LIMITE_TEMPS; // Arrêt du compte à rebours et réinitialisation de ce dernier
+    getVue()->compteARebours->stop();
 
     switch (etat)
     {
@@ -78,6 +80,44 @@ void Presentation::arreterPartie()
         break;
     default:
         break;
+    }
+}
+
+void Presentation::pausePartie()
+{
+    UnEtatJeu etatActuel = getEtat();
+    if (etatActuel != partieEnPause) {
+        setEtat(partieEnPause);
+        getVue()->majInterface(etat);
+    } else {
+        setEtat(partieEnCours);
+        getVue()->majInterface(etat);
+    }
+
+}
+
+void Presentation::tempsEcoule() // Affichage des résultats de la partie en cas de temps écoulé
+{
+    if (getVue()->tempsRestant <= 0) {
+        int scoreFinalJoueur = getModele()->getScoreJoueur();
+        int scoreFinalMachine = getModele()->getScoreMachine();
+        if (scoreFinalJoueur > scoreFinalMachine) {
+                QMessageBox *messageFin = new QMessageBox;
+                messageFin->setWindowTitle("Victoire !");
+                messageFin->setText(" Le temps est écoulé !\n Cependant, vous avez fait mieux que la machine par un score de "+QString::number(scoreFinalJoueur)+" à "+QString::number(scoreFinalMachine));
+                messageFin->show();
+        } else if (scoreFinalJoueur < scoreFinalMachine) {
+            QMessageBox *messageFin = new QMessageBox;
+            messageFin->setWindowTitle("Défaite...");
+            messageFin->setText(" Le temps est écoulé !\n Cependant, la machine a fait mieux que vous par un score de "+QString::number(scoreFinalJoueur)+" à "+QString::number(scoreFinalMachine));
+            messageFin->show();
+        } else {
+            QMessageBox *messageFin = new QMessageBox;
+            messageFin->setWindowTitle("Match-nul");
+            messageFin->setText(" Le temps est écoulé !\n Cependant, vous avez fait match-nul par un score de "+QString::number(scoreFinalJoueur)+" à "+QString::number(scoreFinalMachine));
+            messageFin->show();
+        }
+        arreterPartie();
     }
 }
 
@@ -143,7 +183,7 @@ void Presentation::coupMachine()
     getVue()->afficherCoupMachine(getModele()->getCoupMachine());
 }
 
-void Presentation::majScore(char p_gagnant)
+void Presentation::majScore(char p_gagnant) // Mise à jour des scores et affichage des résultats en cas de limite de score atteinte
 {
     getModele()->majScores(p_gagnant);
     switch (p_gagnant)
@@ -161,19 +201,19 @@ void Presentation::majScore(char p_gagnant)
 
     if (getModele()->getScoreMachine() >= SCORE_LIMITE)
     {
-        arreterPartie();
         QMessageBox *messageFin = new QMessageBox;
-        messageFin->setWindowTitle("Fin de la partie");
-        messageFin->setText("Perdu ! Vous avez perdu contre la machine !");
+        messageFin->setWindowTitle("Défaite...");
+        messageFin->setText("Dommage ! La machine vous à vaincu en "+QString::number(LIMITE_TEMPS - getVue()->tempsRestant)+" secondes...");
         messageFin->show();
+        arreterPartie();
     }
     else if ( getModele()->getScoreJoueur() >= SCORE_LIMITE )
     {
-        arreterPartie();
         QMessageBox *messageFin = new QMessageBox;
-        messageFin->setWindowTitle("Fin de la partie");
-        messageFin->setText("Bravo, vous avez gagné contre la machine !");
+        messageFin->setWindowTitle("Victoire !");
+        messageFin->setText("Bravo ! Vous avez vaincu la machine en "+QString::number(LIMITE_TEMPS - getVue()->tempsRestant)+" secondes !");
         messageFin->show();
+        arreterPartie();
     }
 }
 

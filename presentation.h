@@ -6,7 +6,7 @@ class chifoumiVue;
 class Presentation
 {
 public:
-    enum UnEtatJeu {etatInitial, partieEnCours};
+    enum UnEtatJeu {etatInitial, partieEnCours, partieEnPause}; // Ajout d'un état : partieEnPause
     Presentation();
     void deroulementPartie();
 
@@ -18,6 +18,8 @@ public:
 
     void demarrerPartie();
     void arreterPartie();
+    void pausePartie();
+    void tempsEcoule();
     void coupPierre();
     void coupCiseau();
     void coupPapier();

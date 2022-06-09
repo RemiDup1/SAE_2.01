@@ -2,6 +2,7 @@
 #define MODELE_H
 
 const unsigned int SCORE_LIMITE = 5;
+const unsigned int LIMITE_TEMPS = 30;
 
 class Modele
 {
