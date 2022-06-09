@@ -2,11 +2,15 @@
 #define CHIFOUMIVUE_H
 
 #include <QMainWindow>
+#include "modele.h"
+#include "Presentation.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class chifoumiVue; }
 QT_END_NAMESPACE
 
+class Presentation;
 class chifoumiVue : public QMainWindow
 {
     Q_OBJECT
@@ -14,17 +18,28 @@ class chifoumiVue : public QMainWindow
 public:
     chifoumiVue(QWidget *parent = nullptr);
     ~chifoumiVue();
+    void setPresentation(Presentation *p);
+    Presentation * getPresentation();
+    void afficherScoreJoueur(unsigned int scoreJ);
+    void afficherScoreMachine(unsigned int scoreM);
+    void afficherCoupJoueur(Modele::UnCoup coupJ);
+    void afficherCoupMachine(Modele::UnCoup coupM);
+    void majInterface(Presentation::UnEtatJeu e);
+    QString afficherNomCoup (Modele::UnCoup c);
+
 
 private slots:
-    void demarerPartie();           //Slot pour commencer la partie
-    void coupPierre();              //slot pour le coup Pierre
-    void coupCiseau();              //slot pour le coup ciseau
-    void coupPapier();              //slot pour le coup papier
-    void coupMachine(int);          //slot pour le coup effectuer par la machine
+    void demarrerPartie();
+    void coupPierre();
+    void coupCiseau();
+    void coupPapier();
 
+///* Attributs du Modèle
 private:
+    Presentation *laPresentation;
     Ui::chifoumiVue *ui;
-    int randMinMax(int, int);       //fonction qui génère un nombre aléatoire
-    char determineGagnat(int,int);  //Fonction qui determine le gagnant entre le joueur et la machine
+
+
+
 };
 #endif // CHIFOUMIVUE_H
